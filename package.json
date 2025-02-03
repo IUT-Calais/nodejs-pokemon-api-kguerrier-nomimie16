@@ -13,14 +13,15 @@
     "db:generate": "prisma generate",
     "db:studio": "prisma studio",
     "test": "jest --runInBand",
-    "test:coverage": "jest --coverage --runInBand"
+    "test:coverage": "jest --coverage --runInBand",
+    "db:seed": "prisma db seed"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vfourny/nodejs-pokedex-api.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Noemie LIGNIER",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/vfourny/nodejs-pokedex-api/issues"
