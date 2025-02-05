@@ -42,27 +42,23 @@ export const createPokemon = async (_req: Request , res: Response) => {
   }
 }
 
-
-
-// app.patch('/pokemons-cards/:pokemonCardId', 
     
-    
-// export const updatePokemon = async  (_req: Request , res: Response) => {
-//     const { pokemonCardId } = _req.params;
-//     const {name, pokedexId, typeId, lifePoints, weight, size } = _req.body;
-//     const pokemonCard = await prisma.pokemonCard.update({
-//         where: { id: parseInt(pokemonCardId) },
-//         data: {
-//         name,
-//         pokedexId,
-//         type : { connect: { id: typeId } },
-//         lifePoints,
-//         weight,
-//         size
-//         },
-//     });
-//     res.status(200).send(pokemonCard);
-// }
+export const updatePokemon = async  (_req: Request , res: Response) => {
+    const { pokemonCardId } = _req.params;
+    const {name, pokedexId, typeId, lifePoints, weight, size } = _req.body;
+    const pokemonCard = await prisma.pokemonCard.update({
+        where: { id: parseInt(pokemonCardId) },
+        data: {
+        name,
+        pokedexId,
+        type : { connect: { id: typeId } },
+        lifePoints,
+        weight,
+        size
+        },
+    });
+    res.status(200).send(pokemonCard);
+}
 
 export const deletePokemon = async (_req: Request , res: Response) => {
     const { pokemonCardId } = _req.params;

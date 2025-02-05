@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getPokemonCards, getPokemon, createPokemon, deletePokemon } from './pokemon.controller';
+import { getPokemonCards, getPokemon, createPokemon, deletePokemon, updatePokemon } from './pokemon.controller';
 
 
 export const pokemonRouter = Router();
@@ -8,4 +8,5 @@ export const pokemonRouter = Router();
 pokemonRouter.get('/', getPokemonCards);
 pokemonRouter.get('/:pokemonCardId', getPokemon);
 pokemonRouter.post('/create', createPokemon);
-pokemonRouter.post('/delete/:pokemonCardId', deletePokemon);
+pokemonRouter.delete('/delete/:pokemonCardId', deletePokemon);
+pokemonRouter.patch('/update/:pokemonCardId', updatePokemon);
