@@ -44,6 +44,18 @@ async function main() {
     },
     });
 
+  await prisma.pokemonCard.create({
+    data: {
+      name:"Herbizarre",
+      pokedexId:2,
+      type: { connect: { id: 4 } }, 
+      lifePoints:60,
+      weight:13.0,
+      size:1.0,
+      imageUrl : "https://assets.pokemon.com/assets/cms2/img/pokedex/full/002.png"
+    },
+    });
+
     // await prisma.pokemonCard.createMany({
     //   data: [
     //     {
@@ -58,7 +70,7 @@ async function main() {
     //     {
     //       name:"Florizarre",
     //       pokedexId:3,
-    //       typeId:4, 
+    //       type: { connect: { id: 4 } }, 
     //       lifePoints:80,
     //       weight:100.0,
     //       size:2.0,
