@@ -32,19 +32,16 @@ app.get('/pokemons-cards/:pokemonCardId/', async (_req: Request , res: Response)
   } else {
     res.status(404).send('Pokemon pas trouvé');
   }
-  }
-);
+});
 
 app.post('/pokemons-cards/create', async (_req: Request , res: Response) => {
-  const { name, pokedexId, type, lifePoints, weight, size } = _req.body;
+  const {name, pokedexId, typeId, lifePoints, weight, size } = _req.body;
   try {
     const newPokemonCard = await prisma.pokemonCard.create({
       data: {
         name,
         pokedexId,
-        type: {
-          connect: { id: typeId }
-        },
+        typeId,
         lifePoints,
         weight,
         size        
