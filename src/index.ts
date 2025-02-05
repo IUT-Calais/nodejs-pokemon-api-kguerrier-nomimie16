@@ -1,11 +1,15 @@
 import express from 'express';
 import { Request, Response } from 'express';
 import { PrismaClient } from '@prisma/client';
+import { pokemonRouter } from './pokemon/pokemon.router';
+
 
 export const app = express();
 const port = process.env.PORT || 3000;
 import DBClient from './client'
 const prisma = DBClient.getInstance().prisma
+app.use('/pokemon', pokemonRouter);
+
 
 
 app.use(express.json());
