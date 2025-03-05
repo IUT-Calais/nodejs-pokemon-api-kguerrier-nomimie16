@@ -2,6 +2,8 @@ import express from 'express';
 import { Request, Response } from 'express';
 import { PrismaClient } from '@prisma/client';
 import { pokemonRouter } from './pokemon/pokemon.router';
+import { usersRouter} from './users/users.router';
+
 import bcrypt from 'bcrypt';
 
 
@@ -18,22 +20,24 @@ export function stopServer() {
 } 
 
 app.use('/pokemons-cards', pokemonRouter);
+app.use('/users', usersRouter);
 
-app.post('/users', async (req: Request, res: Response) => {
-  const { email, password } = req.body;
-  try {
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = await prisma.user.create({
-      data: {
-        email,
-        password: hashedPassword
-      }
-    });
-    res.status(201).json(newUser);
-  } catch (error) {
-    res.status(400).send('L\'email est déjà utilisé');
-  }
-});
+
+// app.post('/users', async (req: Request, res: Response) => {
+//   const { email, password } = req.body;
+//   try {
+//     const hashedPassword = await bcrypt.hash(password, 10);
+//     const newUser = await prisma.user.create({
+//       data: {
+//         email,
+//         password: hashedPassword
+//       }
+//     });
+//     res.status(201).json(newUser);
+//   } catch (error) {
+//     res.status(400).send('L\'email est déjà utilisé');
+//   }
+// });
 
 
 // app.get('/pokemons-cards', async(_req: Request , res: Response) => {
