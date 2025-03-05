@@ -6,6 +6,7 @@ const prisma = new PrismaClient();
 async function main() {
   await prisma.type.deleteMany();
   await prisma.pokemonCard.deleteMany();
+  await prisma.user.deleteMany();
 
   await prisma.$executeRaw`DELETE FROM sqlite_sequence WHERE name='pokemonCard'`;
 
@@ -54,6 +55,13 @@ async function main() {
       size:1.0,
       imageUrl : "https://assets.pokemon.com/assets/cms2/img/pokedex/full/002.png"
     },
+    });
+
+    await prisma.user.create({
+      data:{
+        email: "admin@gmail.com",
+        password: "admin"
+      },
     });
 
     // await prisma.pokemonCard.createMany({

@@ -8,7 +8,7 @@ const prisma = new PrismaClient();
 export const getPokemonCards = async(_req: Request , res: Response) => {
   const pokemonCards = await prisma.pokemonCard.findMany({include: {type: true}});
   res.status(200).send(pokemonCards);
-  }
+}
 
 
 export const getPokemon = async (_req: Request , res: Response) => {
