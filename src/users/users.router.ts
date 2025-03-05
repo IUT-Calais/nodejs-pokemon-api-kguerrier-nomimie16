@@ -4,6 +4,6 @@ import {createUser } from './users.controller';
 
 export const usersRouter = Router();
 
-// pokemonRouter.get('/', getPokemonCards);
+// usersRouter.get('/getUsers', getAllUsers);
 // pokemonRouter.get('/:pokemonCardId', getPokemon);
 usersRouter.post('/', createUser);
