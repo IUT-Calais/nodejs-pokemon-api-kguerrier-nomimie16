@@ -14,13 +14,15 @@ const prisma = DBClient.getInstance().prisma
 
 app.use(express.json());
 
+
+app.use('/pokemons-cards', pokemonRouter);
+app.use('/users', usersRouter);
+
 export const server = app.listen(port);
 export function stopServer() {
   server.close();
 } 
 
-app.use('/pokemons-cards', pokemonRouter);
-app.use('/users', usersRouter);
 
 
 // app.post('/users', async (req: Request, res: Response) => {
