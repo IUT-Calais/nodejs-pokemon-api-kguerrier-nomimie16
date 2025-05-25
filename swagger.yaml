@@ -1,0 +1,173 @@
+openapi: 3.0.0
+info:
+  title: Pokémon Card API
+  description: API pour gérer des cartes Pokémon avec authentification JWT.
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+paths:
+  /pokemon-cards:
+    get:
+      summary: Obtenir toutes les cartes Pokémon
+      responses:
+        '200':
+          description: liste des cartes Pokémon
+    post:
+      summary: créer une carte Pokémon 
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PokemonCardInput'
+      responses:
+        '201':
+          description: Carte Pokémon créée
+        '400':
+          description: Mauvaise requête
+        '401':
+          description: Non autorisé
+
+  /pokemon-cards/{pokemonCardId}:
+    get:
+      summary: Obtenir une carte Pokémon par ID
+      parameters:
+        - name: pokemonCardId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Détails de la carte
+        '404':
+          description: Carte non trouvée
+    patch:
+      summary: Modifier une carte Pokémon (authentification requise)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: pokemonCardId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PokemonCardInput'
+      responses:
+        '200':
+          description: Carte modifiée
+        '400':
+          description: Mauvaise requête
+        '401':
+          description: Non autorisé
+    delete:
+      summary: Supprimer une carte Pokémon (authentification requise)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: pokemonCardId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Carte supprimée
+        '401':
+          description: Non autorisé
+        '404':
+          description: Carte non trouvée
+
+  /users:
+    post:
+      summary: Créer un utilisateur
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserInput'
+      responses:
+        '201':
+          description: Utilisateur créé
+        '400':
+          description: Mauvaise requête
+
+  /users/login:
+    post:
+      summary: Connexion d’un utilisateur
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserLogin'
+      responses:
+        '201':
+          description: Connexion réussie (JWT retourné)
+        '400':
+          description: Mot de passe invalide
+        '404':
+          description: Utilisateur non trouvé
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    PokemonCardInput:
+      type: object
+      required:
+        - name
+        - pokedexId
+        - type
+        - lifePoints
+      properties:
+        name:
+          type: string
+        pokedexId:
+          type: integer
+        type:
+          type: integer
+        lifePoints:
+          type: integer
+        size:
+          type: number
+        weight:
+          type: number
+        imageUrl:
+          type: string
+
+    UserInput:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          format: password
+
+    UserLogin:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+        password:
+          type: string

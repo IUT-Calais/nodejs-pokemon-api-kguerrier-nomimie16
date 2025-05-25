@@ -5,9 +5,15 @@ import { pokemonRouter } from './pokemon/pokemon.router';
 import { usersRouter} from './users/users.router';
 
 import bcrypt from 'bcrypt';
+import app from './app';
+import swaggerUi from 'swagger-ui-express';
+import YAML from 'yamljs';
+
+const swaggerDocument = YAML.load('./swagger.yaml');
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 
-export const app = express();
+// export const app = express();
 const port = process.env.PORT || 3000;
 import DBClient from './client'
 const prisma = DBClient.getInstance().prisma
