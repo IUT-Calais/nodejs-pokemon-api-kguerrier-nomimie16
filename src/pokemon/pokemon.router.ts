@@ -4,7 +4,7 @@ import { getPokemonCards, getPokemon, createPokemon, deletePokemon, updatePokemo
 
 export const pokemonRouter = Router();
 
-// Route pour obtenir la liste des pokemons
+
 pokemonRouter.get('/', getPokemonCards);
 pokemonRouter.get('/:pokemonCardId', getPokemon);
 pokemonRouter.post('/create', createPokemon);
