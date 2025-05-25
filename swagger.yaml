@@ -1,19 +1,19 @@
 openapi: 3.0.0
 info:
   title: Pokémon Card API
-  description: API pour gérer des cartes Pokémon avec authentification JWT.
+  description: API pour gérer des cartes Pokemon avec une authentification.
   version: 1.0.0
 servers:
   - url: http://localhost:3000
 paths:
   /pokemon-cards:
     get:
-      summary: Obtenir toutes les cartes Pokémon
+      summary: Obtenir toutes les cartes Pokemon
       responses:
         '200':
           description: liste des cartes Pokémon
     post:
-      summary: créer une carte Pokémon 
+      summary: créer une carte Pokemon 
       security:
         - bearerAuth: []
       requestBody:
